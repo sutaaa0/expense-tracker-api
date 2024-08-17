@@ -1,3 +1,5 @@
+const prisma = require('../database');
+
 const createRecurringExpense = async (req, res) => {
     try {
       const { userId, categoryId, amount, description, frequency, startDate, endDate } = req.body;
@@ -16,6 +18,7 @@ const createRecurringExpense = async (req, res) => {
   
       res.status(201).json(newRecurringExpense);
     } catch (error) {
+      console.log("ini error nya : ",error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   };

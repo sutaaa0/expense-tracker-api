@@ -1,3 +1,5 @@
+const prisma = require('../database');
+
 const createIncome = async (req, res) => {
     try {
       const { userId, amount, source, date } = req.body;

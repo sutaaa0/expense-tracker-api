@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const recurringExpenseController = require('../controllers/recurringExpenseController');
 
-router.post('/recurring-expenses', recurringExpenseController.createRecurringExpense);
-router.get('/recurring-expenses', recurringExpenseController.getRecurringExpenses);
-router.put('/recurring-expenses/:id', recurringExpenseController.updateRecurringExpense);
-router.delete('/recurring-expenses/:id', recurringExpenseController.deleteRecurringExpense);
+router.post('/', recurringExpenseController.createRecurringExpense);
+router.get('/', recurringExpenseController.getRecurringExpenses);
+router.put('/:id', recurringExpenseController.updateRecurringExpense);
+router.delete('/:id', recurringExpenseController.deleteRecurringExpense);
 
 module.exports = router;
