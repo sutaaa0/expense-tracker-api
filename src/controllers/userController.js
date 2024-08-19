@@ -1,4 +1,4 @@
-const userServices = require('../services/userServices');
+const userServices = require("../services/userServices");
 
 // Fungsi untuk mendapatkan semua pengguna
 const getAllUsers = async (req, res) => {
@@ -6,8 +6,8 @@ const getAllUsers = async (req, res) => {
     const users = await userServices.getAllUsers();
     res.send(users);
   } catch (error) {
-    console.error('Error getting users:', error);
-    res.status(500).send({ error: 'Internal Server Error' });
+    console.error("Error getting users:", error);
+    res.status(500).send({ error: "Internal Server Error" });
   }
 };
 
@@ -18,8 +18,19 @@ const getUserById = async (req, res) => {
     const user = await userServices.getUserById(userId);
     res.send(user);
   } catch (error) {
-    console.error('Error getting user:', error);
-    res.status(404).send({ error: 'User not found' });
+    console.error("Error getting user:", error);
+    res.status(404).send({ error: "User not found" });
+  }
+};
+
+const getUserByEmail = async (req, res) => {
+  try {
+    const email = req.params.email;
+    const user = await userServices.getUserByEmail(email);
+    res.send(user);
+  } catch (error) {
+    console.error("Error getting user:", error);
+    res.status(404).send({ error: "User not found" });
   }
 };
 
@@ -31,8 +42,8 @@ const updateUser = async (req, res) => {
     const updatedUser = await userServices.updateUser(userId, updateData);
     res.send(updatedUser);
   } catch (error) {
-    console.error('Error updating user:', error);
-    res.status(400).send({ error: 'Bad Request' });
+    console.error("Error updating user:", error);
+    res.status(400).send({ error: "Bad Request" });
   }
 };
 
@@ -43,9 +54,9 @@ const deleteUser = async (req, res) => {
     await userServices.deleteUser(userId);
     res.status(204).send();
   } catch (error) {
-    console.error('Error deleting user:', error);
-    res.status(404).send({ error: 'User not found' });
+    console.error("Error deleting user:", error);
+    res.status(404).send({ error: "User not found" });
   }
 };
 
-module.exports = { getAllUsers, getUserById, updateUser, deleteUser };
+module.exports = { getAllUsers, getUserById, updateUser, deleteUser, getUserByEmail };

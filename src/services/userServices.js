@@ -24,6 +24,18 @@ const getUserById = async (userId) => {
   return user;
 };
 
+const getUserByEmail = async (email) => {
+  const user = await prisma.user.findUnique({
+    where: { email: email },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  return user;
+};
+
 // Fungsi untuk memperbarui pengguna
 const updateUser = async (userId, updateData) => {
   const updatedUser = await prisma.user.update({
@@ -41,4 +53,4 @@ const deleteUser = async (userId) => {
   });
 };
 
-module.exports = { getAllUsers, getUserById, updateUser, deleteUser };
+module.exports = { getAllUsers, getUserById, updateUser, deleteUser, getUserByEmail };
