@@ -5,9 +5,9 @@ const createExpense = async (req, res) => {
   try {
     const { userId, categoryId, amount, description, date } = req.body;
     const newExpense = await expenseService.createExpense(userId, categoryId, amount, description, date);
-    res.status(201).json({ message: 'Expense created successfully', expense: newExpense });
+    res.status(201).send({ message: 'Expense created successfully', expense: newExpense });
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
@@ -15,9 +15,9 @@ const createExpense = async (req, res) => {
 const getAllExpenses = async (req, res) => {
   try {
     const expenses = await expenseService.getAllExpenses();
-    res.json(expenses);
+    res.send(expenses);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
@@ -27,12 +27,12 @@ const getExpenseById = async (req, res) => {
     const { id } = req.params;
     const expense = await expenseService.getExpenseById(id);
     if (expense) {
-      res.json(expense);
+      res.send(expense);
     } else {
-      res.status(404).json({ error: 'Expense not found' });
+      res.status(404).send({ error: 'Expense not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
@@ -43,12 +43,12 @@ const updateExpense = async (req, res) => {
     const updates = req.body;
     const updatedExpense = await expenseService.updateExpense(id, updates);
     if (updatedExpense) {
-      res.json({ message: 'Expense updated successfully', expense: updatedExpense });
+      res.send({ message: 'Expense updated successfully', expense: updatedExpense });
     } else {
-      res.status(404).json({ error: 'Expense not found' });
+      res.status(404).send({ error: 'Expense not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
@@ -58,12 +58,12 @@ const deleteExpense = async (req, res) => {
     const { id } = req.params;
     const deletedExpense = await expenseService.deleteExpense(id);
     if (deletedExpense) {
-      res.json({ message: 'Expense deleted successfully' });
+      res.send({ message: 'Expense deleted successfully' });
     } else {
-      res.status(404).json({ error: 'Expense not found' });
+      res.status(404).send({ error: 'Expense not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 

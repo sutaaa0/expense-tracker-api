@@ -1,21 +1,17 @@
 const jwt = require('jsonwebtoken');
 
-// Middleware untuk otentikasi
-const authMiddleware = (req, res, next) => {
-  const token = req.headers['authorization'];
+// Middleware untuk memverifikasi token
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token) {
-    return res.status(401).json({ error: 'No token provided' });
-  }
+  if (token == null) return res.sendStatus(401);
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ error: 'Failed to authenticate token' });
-    }
-
-    req.userId = decoded.userId;
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
     next();
   });
-};
+}
 
-module.exports = authMiddleware;
+module.exports = authenticateToken;

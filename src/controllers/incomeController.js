@@ -13,18 +13,18 @@ const createIncome = async (req, res) => {
         }
       });
   
-      res.status(201).json(newIncome);
+      res.status(201).send(newIncome);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   };
 
   const getIncomes = async (req, res) => {
     try {
       const incomes = await prisma.income.findMany();
-      res.status(200).json(incomes);
+      res.status(200).send(incomes);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   };
 
@@ -42,9 +42,9 @@ const createIncome = async (req, res) => {
         }
       });
   
-      res.status(200).json(updatedIncome);
+      res.status(200).send(updatedIncome);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   };
 
@@ -58,7 +58,7 @@ const createIncome = async (req, res) => {
   
       res.status(204).end();
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   };
   

@@ -5,9 +5,9 @@ const createCategory = async (req, res) => {
   try {
     const { name, description } = req.body;
     const newCategory = await categoryService.createCategory({ name, description });
-    res.status(201).json(newCategory);
+    res.status(201).send(newCategory);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send({ error: error.message });
   }
 };
 
@@ -15,9 +15,9 @@ const createCategory = async (req, res) => {
 const getCategories = async (req, res) => {
   try {
     const categories = await categoryService.getCategories();
-    res.json(categories);
+    res.send(categories);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send({ error: error.message });
   }
 };
 
@@ -26,9 +26,9 @@ const getCategoryById = async (req, res) => {
   try {
     const { id } = req.params;
     const category = await categoryService.getCategoryById(id);
-    res.json(category);
+    res.send(category);
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).send({ error: error.message });
   }
 };
 
@@ -38,9 +38,9 @@ const updateCategory = async (req, res) => {
     const { id } = req.params;
     const { name, description } = req.body;
     const updatedCategory = await categoryService.updateCategory(id, { name, description });
-    res.json(updatedCategory);
+    res.send(updatedCategory);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send({ error: error.message });
   }
 };
 
@@ -51,7 +51,7 @@ const deleteCategory = async (req, res) => {
     await categoryService.deleteCategory(id);
     res.status(204).end();
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send({ error: error.message });
   }
 };
 

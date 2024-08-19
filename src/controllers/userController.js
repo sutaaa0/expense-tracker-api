@@ -4,10 +4,10 @@ const userServices = require('../services/userServices');
 const getAllUsers = async (req, res) => {
   try {
     const users = await userServices.getAllUsers();
-    res.json(users);
+    res.send(users);
   } catch (error) {
     console.error('Error getting users:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
@@ -16,10 +16,10 @@ const getUserById = async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await userServices.getUserById(userId);
-    res.json(user);
+    res.send(user);
   } catch (error) {
     console.error('Error getting user:', error);
-    res.status(404).json({ error: 'User not found' });
+    res.status(404).send({ error: 'User not found' });
   }
 };
 
@@ -29,10 +29,10 @@ const updateUser = async (req, res) => {
     const userId = req.params.id;
     const updateData = req.body;
     const updatedUser = await userServices.updateUser(userId, updateData);
-    res.json(updatedUser);
+    res.send(updatedUser);
   } catch (error) {
     console.error('Error updating user:', error);
-    res.status(400).json({ error: 'Bad Request' });
+    res.status(400).send({ error: 'Bad Request' });
   }
 };
 
@@ -44,7 +44,7 @@ const deleteUser = async (req, res) => {
     res.status(204).send();
   } catch (error) {
     console.error('Error deleting user:', error);
-    res.status(404).json({ error: 'User not found' });
+    res.status(404).send({ error: 'User not found' });
   }
 };
 

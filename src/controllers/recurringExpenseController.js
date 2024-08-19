@@ -16,19 +16,19 @@ const createRecurringExpense = async (req, res) => {
         }
       });
   
-      res.status(201).json(newRecurringExpense);
+      res.status(201).send(newRecurringExpense);
     } catch (error) {
       console.log("ini error nya : ",error);
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   };
 
   const getRecurringExpenses = async (req, res) => {
     try {
       const recurringExpenses = await prisma.recurringExpense.findMany();
-      res.status(200).json(recurringExpenses);
+      res.status(200).send(recurringExpenses);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   };
 
@@ -48,9 +48,9 @@ const createRecurringExpense = async (req, res) => {
         }
       });
   
-      res.status(200).json(updatedRecurringExpense);
+      res.status(200).send(updatedRecurringExpense);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   };
 
@@ -64,7 +64,7 @@ const createRecurringExpense = async (req, res) => {
   
       res.status(204).end();
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      res.status(500).send({ error: 'Internal Server Error' });
     }
   };
 

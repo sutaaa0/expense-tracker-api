@@ -4,9 +4,9 @@ const budgetService = require('../services/budgetServices');
 const addBudget = async (req, res) => {
   try {
     const budget = await budgetService.createBudget(req.body);
-    res.status(201).json(budget);
+    res.status(201).send(budget);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
@@ -14,9 +14,9 @@ const addBudget = async (req, res) => {
 const getBudgets = async (req, res) => {
   try {
     const budgets = await budgetService.getAllBudgets();
-    res.status(200).json(budgets);
+    res.status(200).send(budgets);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
@@ -25,12 +25,12 @@ const getBudget = async (req, res) => {
   try {
     const budget = await budgetService.getBudgetById(req.params.id);
     if (budget) {
-      res.status(200).json(budget);
+      res.status(200).send(budget);
     } else {
-      res.status(404).json({ error: 'Budget not found' });
+      res.status(404).send({ error: 'Budget not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
@@ -39,12 +39,12 @@ const updateBudget = async (req, res) => {
   try {
     const budget = await budgetService.updateBudget(req.params.id, req.body);
     if (budget) {
-      res.status(200).json(budget);
+      res.status(200).send(budget);
     } else {
-      res.status(404).json({ error: 'Budget not found' });
+      res.status(404).send({ error: 'Budget not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
@@ -54,7 +54,7 @@ const deleteBudget = async (req, res) => {
     await budgetService.deleteBudget(req.params.id);
     res.status(204).end();
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).send({ error: 'Internal Server Error' });
   }
 };
 
