@@ -15,6 +15,24 @@ const getAllUsers = async () => {
 const getUserById = async (userId) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
+    include: {
+      expenses: true,
+      incomes: true,
+      budgets: true,
+      recurringExpenses: true,
+    }
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  return user;
+};
+
+const getUserByEmail = async (email) => {
+  const user = await prisma.user.findUnique({
+    where: { email: email },
   });
 
   if (!user) {
@@ -41,4 +59,4 @@ const deleteUser = async (userId) => {
   });
 };
 
-module.exports = { getAllUsers, getUserById, updateUser, deleteUser };
+module.exports = { getAllUsers, getUserById, updateUser, deleteUser, getUserByEmail };

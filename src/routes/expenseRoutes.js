@@ -1,5 +1,6 @@
 const express = require('express');
-const { createExpense, getAllExpenses, getExpenseById, updateExpense, deleteExpense } = require('../controllers/expenseController');
+const { createExpense, getAllExpenses, getExpenseById, updateExpense, deleteExpense, getExpenseUser } = require('../controllers/expenseController');
+const { getFilteredAndSortedExpenses } = require('../services/expenseServices');
 
 const router = express.Router();
 
@@ -9,6 +10,8 @@ router.post('/', createExpense);
 // Get All Expenses
 router.get('/', getAllExpenses);
 
+router.get('/:userId', getExpenseUser);
+
 // Get Expense by ID
 router.get('/:id', getExpenseById);
 
@@ -17,5 +20,6 @@ router.put('/:id', updateExpense);
 
 // Delete Expense
 router.delete('/:id', deleteExpense);
+
 
 module.exports = router;

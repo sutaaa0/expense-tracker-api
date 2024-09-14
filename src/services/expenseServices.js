@@ -18,6 +18,15 @@ const getAllExpenses = async () => {
   return prisma.expense.findMany();
 };
 
+const getExpenseUser = async (userId) => {
+  return prisma.expense.findMany({
+    where: { userId: userId },
+    include: {
+      category: true
+    }
+  });
+}
+
 // Get Expense by ID
 const getExpenseById = async (id) => {
   return prisma.expense.findUnique({
@@ -40,4 +49,4 @@ const deleteExpense = async (id) => {
   });
 };
 
-module.exports = { createExpense, getAllExpenses, getExpenseById, updateExpense, deleteExpense };
+module.exports = { createExpense, getAllExpenses, getExpenseById, updateExpense, deleteExpense,getExpenseUser };
