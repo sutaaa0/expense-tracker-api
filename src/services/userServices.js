@@ -15,6 +15,12 @@ const getAllUsers = async () => {
 const getUserById = async (userId) => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
+    include: {
+      expenses: true,
+      incomes: true,
+      budgets: true,
+      recurringExpenses: true,
+    }
   });
 
   if (!user) {
